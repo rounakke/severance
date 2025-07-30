@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Experience</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- The custom cursor will now be drawn on a canvas, so no separate div is needed here -->
+
+    <div id="screeen">
+
+        <video id="door_video" playsinline>
+            <source src="door.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <video id="door_win_video" playsinline>
+            <source src="door_win.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <video id="door_death_video" playsinline>
+            <source src="door_death.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <video id="loop_1_video" playsinline>
+            <source src="loop_1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <video id="loop_2_video" playsinline>
+            <source src="loop_2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <video id="loop_win_video" playsinline>
+            <source src="loop_win.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <video id="loop_death_video" playsinline>
+            <source src="loop_death.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <canvas id="textCanvas"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
