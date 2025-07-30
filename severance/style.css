@@ -1,0 +1,310 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Hide scrollbars */
+    font-family: 'Inter', sans-serif;
+    background-color: black;
+    cursor: none; /* Hide default cursor initially for the whole page */
+
+
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+}
+
+/* Initial "Enter to Start" screen styling */
+#start-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+/* Blink effect for "Enter to Start" text */
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+#start-text {
+    animation: blink 1.5s step-start infinite; /* Changed to blink animation */
+    font-family: 'Courier New', Courier, monospace; /* Set font for blink text */
+    letter-spacing: 0.1em; /* Added for classic terminal look */
+}
+
+/* Video player styling */
+#fullscreen-video {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers the entire screen */
+    z-index: 90;
+}
+
+/* Main content area after video */
+#main-content {
+    display: none; /* Hidden by default */
+    width: 100%;
+    height: 100%;
+    /* Default background color, will be overridden by image after video */
+    background-color: #1a1a1a;
+    position: relative; /* Needed for custom cursor positioning */
+    overflow: hidden; /* Ensure custom cursor doesn't go outside */
+    /* Ensure the image takes up the whole screen without duplication */
+    background-size: 100% 100%; /* Stretches the image to fit the entire area, may distort aspect ratio */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent image repetition */
+}
+
+/* Custom cursor styling */
+#custom-cursor {
+    position: absolute;
+    width: 20px; /* Size of your custom cursor */
+    height: 20px;
+    background-color: limegreen; /* Example color */
+    border-radius: 50%; /* Make it a circle */
+    pointer-events: none; /* Ensures it doesn't interfere with mouse events on elements below it */
+    transform: translate(-50%, -50%); /* Center the cursor on its coordinates */
+    z-index: 200; /* Above other content */
+    display: none; /* Hidden by default */
+}
+
+/* Bounding box for the custom cursor (for visual debugging, can be removed) */
+#cursor-bounding-box {
+    position: absolute;
+    border: 5px dashed rgba(255, 0, 0, 0.8); /* Changed border to 5px thick and more opaque */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    z-index: 190;
+    pointer-events: none;
+}
+
+#pink-rectangle,
+#pink-rectangle-bottom {
+    width: 838px; /* Example fixed width */
+    height: 15px; /* Example fixed height */
+    background-color: #5db6c4; /* Pink color */
+    position: absolute; /* Position it relative to #main-content */
+    left: 19%; /* Center horizontally */
+    z-index: 10; /* Ensure it's above the background image but below the cursor */
+    border-radius: 8px; /* Slightly rounded corners for aesthetics */
+    pointer-events: none;
+}
+
+#pink-rectangle {
+    top: 26%; /* Center vertically */
+    pointer-events: none;
+}
+
+#pink-rectangle-bottom {
+    top: 66%; /* Center vertically */
+    pointer-events: none;
+}
+
+#unfilled-rectangle {
+    width: 695px; /* Example width */
+    height: 40px; /* Example height */
+    border: 5px solid #5db6c4; /* Cyan border, no fill */
+    background-color: transparent; /* Ensure it's not filled */
+    position: absolute; /* Position it relative to #main-content */
+    top: 18%; /* Example position */
+    left: 20%; /* Example position */
+    z-index: 15; /* Ensure it's above the background but potentially below the cursor */
+    border-radius: 5px; /* Slightly rounded corners */
+    color: cyan; /* Text color for content inside */
+    padding: 15px; /* Add some padding for the text */
+    box-sizing: border-box; /* Ensure padding is included in width/height */
+    text-align: center; /* Center text horizontally */
+    display: flex; /* Use flexbox for vertical centering of text */
+    flex-direction: column;
+    justify-content: center; /* Center text vertically */
+    align-items: start; /* Align text to the start (left) */
+    font-size: 2.2rem; /* Increased font size from 1rem to 1.2rem */
+    line-height: 1.4; /* Adjust line height for readability */
+    border-right: none;
+    pointer-events: none;
+}
+
+#otherText {
+    width: 675px; /* Example width */
+    height: 40px; /* Example height */
+    background-color: transparent; /* Ensure it's not filled */
+    position: absolute; /* Position it relative to #main-content */
+    top: 18%; /* Example position */
+    left: 20%; /* Example position */
+    z-index: 15; /* Ensure it's above the background but potentially below the cursor */
+    border-radius: 5px; /* Slightly rounded corners */
+    color: cyan; /* Text color for content inside */
+    padding: 15px; /* Add some padding for the text */
+    box-sizing: border-box; /* Ensure padding is included in width/height */
+    text-align: center; /* Center text horizontally */
+    display: flex; /* Use flexbox for vertical centering of text */
+    flex-direction: column;
+    justify-content: center; /* Center text vertically */
+    align-items: end; /* Align text to the end (right) */
+    font-size: 2.2rem; /* Increased font size from 1rem to 1.2rem */
+    line-height: 1.4; /* Adjust line height for readability */
+    pointer-events: none;
+}
+
+/* Optimized styling for the numbered boxes */
+#first, #second, #third, #fourth, #fith {
+    width: 130px;
+    height: 40px;
+    border: 3px solid #5db6c4;
+    background-color: transparent;
+    position: absolute;
+    top: 69%;
+    z-index: 15;
+    border-radius: 5px;
+    color: cyan;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+    line-height: 1.4;
+    pointer-events: none;
+}
+
+/* Individual left positioning for each numbered box */
+#first {
+    left: 21%;
+    pointer-events: none;
+}
+
+#second {
+    left: 29.5%;
+    pointer-events: none;
+}
+
+#third {
+    left: 38.5%;
+    pointer-events: none;
+}
+
+#fourth {
+    left: 47.4%;
+    pointer-events: none;
+}
+
+#fith {
+    left: 56%;
+    pointer-events: none;
+}
+
+/* Optimized styling for the "B" numbered boxes */
+/* Base styles for the percentage boxes */
+.percentage-box { /* Applied this class to all B boxes */
+    width: 130px;
+    height: 20px;
+    border: 3px solid #5db6c4;
+    background-color: transparent;
+    position: absolute;
+    top: 73.5%;
+    z-index: 15;
+    border-radius: 5px;
+    color: black;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start; /* Align text to the start (left) for B boxes */
+    font-size: 1.6rem;
+    line-height: 1.4;
+    pointer-events: none;
+    overflow: hidden; /* Crucial to clip the fill-bar at the box edges */
+}
+
+/* NEW: Styles for the fill bar inside the percentage boxes */
+.fill-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%; /* Fill the entire height of the parent box */
+    background-color: cyan;
+    border-radius: 2px; /* Slightly less than parent's border-radius for aesthetic */
+    transition: width 1s ease-out; /* Smooth animation for the fill */
+    z-index: -1; /* Place behind any potential text if you add it back */
+}
+
+
+/* Individual left positioning for each "B" numbered box */
+#firstB {
+    left: 21%;
+}
+
+#secondB {
+    left: 29.5%;
+}
+
+#thirdB {
+    left: 38.5%;
+}
+
+#fourthB {
+    left: 47.4%;
+}
+
+#fithB {
+    left: 56%;
+}
+
+#logo-image {
+    position: absolute; /* Position it relative to #main-content */
+    width: 200px; /* Example fixed width for the logo */
+    height: auto; /* Maintain aspect ratio */
+    top: 8.5%; /* Position from the top */
+    right: 36%; /* Position from the right */
+    z-index: 25; /* Ensure it's above other elements but below the cursor */
+    /* Optional: Add some subtle styling */
+    pointer-events: none;
+}
+
+#screen {
+    width: 838px; /* Example fixed width */
+    height: 405px; /* Example fixed height */
+    background-color: #182f54; /* Pink color */
+    position: absolute; /* Position it relative to #main-content */
+    top: 28%; /* Center vertically */
+    left: 19%; /* Center horizontally */
+    z-index: 10; /* Ensure it's above the background image but below the cursor */
+    border-radius: 8px;
+    overflow: hidden; /* Hide anything overflowing the screen */
+}
+
+/* Styling for the canvas within the screen */
+#random-numbers-canvas {
+    display: block; /* Ensure canvas behaves like a block element */
+    width: 100%;
+    height: 100%;
+    color: cyan; /* Text color for content inside */
+    /* The actual drawing and transformations will be done in JavaScript */
+    /* Add transition for zoom effect */
+    transition: transform 1s ease-out; /* Increased transition duration for slower zoom */
+    will-change: transform; /* Hint to browser for optimization */
+}
