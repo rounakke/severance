@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Experience</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- The custom cursor will now be drawn on a canvas, so no separate div is needed here -->
+
+    <div id="start-screen">
+        <h1 id="start-text" class="text-white text-5xl md:text-7xl lg:text-8xl font-bold rounded-lg p-4">
+            ENTER TO START
+        </h1>
+    </div>
+
+    <video id="fullscreen-video" playsinline>
+        <source src="severance_enterence.mp4" type="video/mp4" />
+    </video>
+    <img id="logo-image" src="lumon.svg" alt="Your Logo">
+
+    <div id="main-content" class="flex flex-col justify-center items-center text-white text-3xl p-8">
+        <div id="pink-rectangle"></div>
+        <div id="pink-rectangle-bottom"></div>
+
+        <div id="unfilled-rectangle">
+            <p>Cold Harbour</p>
+        </div>
+        <div id="otherText">
+            <p id="total-percentage-display">38% Complete</p>
+        </div>
+      
+
+        <div id="first">
+            <p>01</p>
+        </div>
+        <div id="second">
+            <p>02</p>
+        </div>
+        <div id="third">
+            <p>03</p>
+        </div>
+        <div id="fourth">
+            <p>04</p>
+        </div>
+        <div id="fith">
+            <p>05</p>
+        </div>
+
+
+        <div id="firstB" class="percentage-box">
+            <p>30%</p>
+            <div class="fill-bar" data-percent="30"></div>
+        </div>
+        <div id="secondB" class="percentage-box">
+            <p>52%</p>
+            <div class="fill-bar" data-percent="52"></div>
+        </div>
+        <div id="thirdB" class="percentage-box">
+            <p>31%</p>
+            <div class="fill-bar" data-percent="31"></div>
+        </div>
+        <div id="fourthB" class="percentage-box">
+            <p>24%</p>
+            <div class="fill-bar" data-percent="24"></div>
+        </div>
+        <div id="fithB" class="percentage-box">
+            <p>55%</p>
+            <div class="fill-bar" data-percent="55"></div>
+        </div>
+
+        <div id="screen">
+            <canvas id="random-numbers-canvas"></canvas>
+        </div>
+
+        <div id="score-display" style="position: absolute; top: 20px; left: 20px; font-size: 2em; color: cyan; z-index: 50;">Score: 0</div>
+       
+
+    </div>
+
+
+    <!-- <div  id="cursor-bounding-box"></div> -->
+  
+
+    <div id="custom-cursor"></div>
+
+    <script src="script.js"></script>
+</body>
+    </html>
