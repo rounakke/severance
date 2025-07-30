@@ -1,0 +1,46 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Hide scrollbars */
+    font-family: 'Inter', sans-serif;
+    background-color: black;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+}
+
+
+#start-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+#start-text {
+    animation: blink 2.5s step-start infinite; /* Changed to blink animation */
+    font-family: 'Courier New', Courier, monospace; /* Set font for blink text */
+    letter-spacing: 0.1em; /* Added for classic terminal look */
+}
+/* Blink effect for "Enter to Start" text */
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
