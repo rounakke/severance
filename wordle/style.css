@@ -1,0 +1,274 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #121213; /* Dark background */
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+#wordle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Game Board (Grid) */
+#game-board {
+    display: flex; /* Make #game-board a flex container */
+    flex-direction: column; /* Stack the rows vertically */
+    align-items: center; /* Center each .word-row horizontally */
+    gap: 5px; /* Space between each row */
+    padding: 10px;
+}
+
+/* --- Style the new containers and .word-row --- */
+.word-row {
+    display: flex; /* Make each row a flex container */
+    align-items: center;
+    margin-bottom: 5px; /* Space between word rows */
+  
+    /* You may want to set a max-width for the entire game-board or its parent if you need more control */
+}
+.main-boxes-container {
+    
+    display: flex; /* Make this a flex container for its own letter boxes */
+    gap: 5px; /* Space between the main letter boxes */
+}
+
+.secret-boxes-container {
+    display: flex; /* Make this a flex container for its own secret letter boxes */
+    gap: 5px; /* Space between the secret boxes */
+    margin-left: 5px;
+    opacity: 0;
+}
+
+.unusedleft {
+    display: flex; /* Make this a flex container for its own secret letter boxes */
+    gap: 5px; /* Space between the secret boxes */
+    margin-left: 5px;
+    opacity: 0; /* Adjust this value to control the gap between main and secret boxes */
+}
+.unusedright {
+    display: flex; /* Make this a flex container for its own secret letter boxes */
+    gap: 5px; /* Space between the secret boxes */
+    margin-left: 5px;
+    opacity: 0; /* Adjust this value to control the gap between main and secret boxes */
+}
+.letter-box {
+    width: 60px; /* Size of each letter square */
+    height: 60px;
+    border: 2px solid #3a3a3c; /* Default border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.secretLetterBox {
+    width: 60px; /* Size of each letter square */
+    height: 60px;
+    border: 2px solid #538d4e;
+    background-color: #538d4e; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    /* Make secret boxes slightly transparent */
+}
+
+
+
+/* Feedback colors */
+.correct {
+    background-color: #538d4e; /* Green */
+    border-color: #538d4e;
+}
+
+.present {
+    background-color: #b59f3b; /* Yellow */
+    border-color: #b59f3b;
+}
+
+.absent {
+    background-color: #3a3a3c; /* Dark gray */
+    border-color: #3a3a3c;
+}
+
+/* Message container */
+#message-container {
+    position: fixed; /* Positions the element relative to the viewport */
+    left: 50%; /* Centers the element horizontally */
+    transform: translateX(-50%); /* Ensures perfect horizontal centering */
+    /* --- Changes for Animation --- */
+    opacity: 0; /* Start completely invisible */
+    top: 90%; /* Start slightly below its final position (you can adjust this) */
+    /* Add 'top' to the transition property so it animates up smoothly */
+    transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out; /* Smooth fade and slide */
+    /* ----------------------------- */
+
+    background-color: rgba(0, 0, 0, 0.7); /* Optional: semi-transparent background */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Some padding around the text */
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1000; /* Ensures it appears above other game elements */
+    font-size: 3em; /* Adjust font size as needed */
+    text-align: center; /* Center the text within the container */
+    min-width: 200px; /* Ensure it has a minimum width */
+    /* Remove the old opacity: 1; here */
+}
+
+    #message-container.show {
+        opacity: 1;
+    }
+
+#answer {
+    position: fixed; /* Positions the element relative to the viewport */
+    top: 100px; /* Adjust this value to set distance from the top */
+    left: 50%; /* Centers the element horizontally */
+    transform: translateX(-50%); /* Ensures perfect horizontal centering */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Some padding around the text */
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1000; /* Ensures it appears above other game elements */
+    font-size: 1.2em; /* Adjust font size as needed */
+    text-align: center; /* Center the text within the container */
+    min-width: 200px; /* Ensure it has a minimum width */
+    transition: opacity 0.3s ease-in-out; /* Smooth fade effect */
+}
+/* Keyboard styles (basic) */
+#keyboard {
+    display: flex;
+    flex-direction: column;
+  
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.key {
+    background-color: #818384; /* Light gray */
+    color: white;
+    padding: 25px 20px;
+    margin: 0 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    min-width: 40px; /* Ensure keys have a minimum width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+    border: none; /* Add this line to remove the border */
+    outline: none;
+}
+
+    .key:active {
+        background-color: #555;
+    }
+
+    .key.large {
+        min-width: 60px; /* Larger keys for Enter/Backspace */
+    }
+
+    /* Keyboard feedback colors (should match letter-box feedback) */
+    .key.correct {
+        background-color: #538d4e; /* Green */
+    }
+
+    .key.present {
+        background-color: #b59f3b; /* Yellow */
+    }
+
+    .key.absent {
+        background-color: #3a3a3c; /* Dark gray */
+    }
+
+#message-box {
+    /* 1. Set positioning type: */
+    position: fixed;
+    right: 10px; /* Places it 10 pixels from the right edge of the screen */
+
+    top: 50%; /* Moves the top edge of the box to the vertical middle of its container */
+    transform: translateY(-50%);
+    width: 755px;
+    height: 40%;
+    /* --- ADD THESE STYLES --- */
+
+    color: white; /* Example: White text color */
+
+    font-size: 4em;
+    padding: 15px;
+    box-sizing: border-box;
+    z-index: 1000;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Optional: overflow: auto; if text might exceed height */
+}
+#nextButton {
+    position: fixed; /* Positions the element relative to the viewport */
+    left: 20%; /* Centers the element horizontally */
+    transform: translateX(-50%); /* Ensures perfect horizontal centering */
+    /* --- Key Changes for Initial Hidden State and Transition --- */
+    opacity: 0; /* Start completely invisible by default */
+    top: 50%; /* This is its target / final vertical position */
+    transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out; /* Enable smooth transitions for both */
+    /* ----------------------------------------------------------- */
+
+    background-color: yellowgreen; /* Button background color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding inside the button */
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1000; /* Ensures it appears above other game elements */
+    font-size: 3em; /* Adjust font size as needed */
+    text-align: center; /* Center the text within the button */
+    width: 200px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    cursor: pointer; /* Makes it clear it's clickable */
+    border: none; /* Remove default button border if you're using a div */
+}
+
+#video {
+    /* 1. Set positioning type: */
+    position: fixed;
+    /* Places it 10 pixels from the right edge of the screen */
+    left: 1250px; /* Places it 10 pixels from the left edge of the screen */
+    top: 80%; /* Moves the top edge of the box to the vertical middle of its container */
+    transform: translateY(-50%);
+    width: 755px;
+    height: 40%;
+    /* --- ADD THESE STYLES --- */
+    opacity: 0;
+    color: white; /* Example: White text color */
+
+    font-size: 4em;
+    padding: 15px;
+    box-sizing: border-box;
+    z-index: 1000;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Optional: overflow: auto; if text might exceed height */
+}
