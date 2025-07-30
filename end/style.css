@@ -30,7 +30,7 @@ html, body {
 }
 
 #start-text {
-    animation: blink 2.5s step-start infinite; /* Changed to blink animation */
+    animation: blink 4.5s step-start infinite; /* Changed to blink animation */
     font-family: 'Courier New', Courier, monospace; /* Set font for blink text */
     letter-spacing: 0.1em; /* Added for classic terminal look */
 }
