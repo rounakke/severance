@@ -9,12 +9,45 @@
 <body>
     <!-- The custom cursor will now be drawn on a canvas, so no separate div is needed here -->
 
-    <div id="start-screen">
-        <h1 id="start-text" class="text-white text-5xl md:text-7xl lg:text-8xl font-bold rounded-lg p-4">
-            ENTER TO START
-        </h1>
+    <div id="screeen">
+
+        <video id="door_video" playsinline>
+            <source src="door.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <video id="door_win_video" playsinline>
+            <source src="door_win.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <video id="door_death_video" playsinline>
+            <source src="door_death.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <video id="loop_1_video" playsinline>
+            <source src="loop_1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <video id="loop_2_video" playsinline>
+            <source src="loop_2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <video id="loop_win_video" playsinline>
+            <source src="loop_win.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <video id="loop_death_video" playsinline>
+            <source src="loop_death.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+
+        <canvas id="textCanvas"></canvas>
     </div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>
