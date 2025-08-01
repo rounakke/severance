@@ -16,7 +16,7 @@ const videoElement = document.getElementById('video');
 
 // Dummy word list for now. In a real app, fetch from an API or a larger file.
  WORD_LIST = [
-"SISSY","PEKKA","MUNGE","MIDNA","EXTRA"
+"SISSY","MUNGE","EXTRA"
 ];
 
 const messageContainer = document.getElementById('message-container');
@@ -291,7 +291,11 @@ function handleKeyDown(event) {
 
                 setTimeout(() => {
                     extraMessage("it was actually diddy");
-                    newGame();
+
+                    setTimeout(() => {
+                        newGame();
+                    }, 2000); 
+
                 }, 2000);
                 secretWord = "DIDDY";
 
@@ -306,14 +310,19 @@ function handleKeyDown(event) {
 
             showsecret();
             playVideo();
-            newGame();
+
+            setTimeout(() => {
+                newGame();
+            }, 4000); 
         }
         else if (wordOfTheDay === "EXTRA") {
             changeAnswers();
 
             extraMessage("that was so easy <br>  i omnyad");
 
-            newGame();
+            setTimeout(() => {
+                newGame();
+            }, 2000); 
         }
         else
         {
@@ -603,7 +612,7 @@ function onNextButtonPressed() {
     }
     else
     {
-        window.location.href = '../evil/index.html';
+        window.location.href = 'fortnite/index.html';
     }
 
     isbuttonVisible = false; // Reset the visibility flag
