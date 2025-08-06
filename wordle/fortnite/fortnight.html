@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Runner</title>
+    <!-- Tailwind CSS for basic styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="fortnight.css" />
+</head>
+<body class="bg-gray-900 flex items-center justify-center h-screen">
+
+    <div id="game-container">
+        <div id="score-display">Score: 0</div>
+        <canvas id="gameCanvas" width="1200" height="600"></canvas>
+        <div id="health-display">Health: 100</div>
+    </div>
+
+    <div id="game-over-screen">
+        <h2>Game Over</h2>
+        <p>Your final score: <span id="final-score">0</span></p>
+        <button class="restart-button" onclick="restartGame()">Restart</button>
+    </div>
+
+    <img id="victory-image" src="victory.png">
+    <img id="pro-image" src="pro.png">
+
+    <div id="nextButton">
+        <buttn class="button" onclick="next()">Next</buttn>
+    </div>
+    
+
+    <img id="large" src="wordle.png" />
+
+    <script src="fortnight.js"></script>
+</body>
+</html>
