@@ -1250,7 +1250,8 @@ function handleResize() {
     }
 }
 
-// Initialize on window load: show start screen and hide game content/video
+let fullscreen = false;
+
 window.onload = () => {
     startScreen.style.display = 'none';
     fullscreenVideo.style.display = 'block';
@@ -1258,13 +1259,6 @@ window.onload = () => {
     customCursor.style.display = 'none';
     document.body.style.cursor = 'none'; 
 
-    fullscreenVideo.play().catch(error => {
-        console.error("Autoplay failed:", error);
-        // Fallback if autoplay is blocked: directly show main content
-        videoEndedHandler();
-    });
-
-    // Request fullscreen if video autoplay is successful or not needed
     if (document.documentElement.requestFullscreen) {
         document.documentElement.requestFullscreen();
     } else if (document.documentElement.mozRequestFullScreen) { // Firefox
@@ -1275,6 +1269,39 @@ window.onload = () => {
         document.documentElement.msRequestFullscreen();
     }
 
+    setTimeout(() => {
+
+        if (document.fullscreenElement == null) {
+
+
+            const overlay = document.createElement('div');
+            overlay.id = 'fullscreen-overlay';
+            overlay.innerHTML = `
+        <p>Press 'ENTER' to go full screen.</p>
+    `;
+            document.body.appendChild(overlay);
+
+            // Add an event listener to the document for the 'Enter' key
+            document.addEventListener('keydown', handleKeypress);
+
+
+        }
+        else {
+            fullscreen = true;
+        }
+
+    }, 100); 
+
+
+    fullscreenVideo.play().catch(error => {
+        console.error("Autoplay failed:", error);
+        // Fallback if autoplay is blocked: directly show main content
+        videoEndedHandler();
+    });
+
+    // Request fullscreen if video autoplay is successful or not needed
+    
+
    
     fullscreenVideo.addEventListener('ended', videoEndedHandler);
     window.addEventListener('resize', handleResize);
@@ -1282,3 +1309,33 @@ window.onload = () => {
     // Initial check for aspect ratio for `main-content`
     handleResize(); // Call once to set initial sizes and positions correctly
 };
+
+
+function handleKeypress(event) {
+    if (event.key === 'Enter') {
+
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+            document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+            document.documentElement.msRequestFullscreen();
+        }
+
+
+        // Remove the overlay and the event listener
+        const overlay = document.getElementById('fullscreen-overlay');
+        if (overlay) {
+            overlay.remove();
+        }
+        document.removeEventListener('keydown', handleKeypress);
+
+        fullscreenVideo.play().catch(error => {
+            console.error("Autoplay failed:", error);
+            // Fallback if autoplay is blocked: directly show main content
+            videoEndedHandler();
+        });
+    }
+}
