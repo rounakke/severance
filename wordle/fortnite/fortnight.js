@@ -720,21 +720,7 @@ function handleSpeed() {
         speedChange();
     }
 
-    if (TARGET_SPEED <= ORIGINAL_SCROLL_SPEED) {
-
-        if (SCROLL_SPEED === 0) {
-
-            cancelAnimationFrame(animationFrameId);
-            clearInterval(scoreIntervalId);
-        }
-
-
-        const progress = Math.min(score / SCORE_THRESHOLD_FOR_MAX_SPEED, 1);
-        SCROLL_SPEED = ORIGINAL_SCROLL_SPEED * (1 - progress)
-
-
-
-    }
+   
 
 
 }
@@ -742,11 +728,11 @@ function handleSpeed() {
 function speedChange()
 {
 
-   if (score >= 950) {
+   if (score >= 1000) {
 
-        ORIGINAL_SCROLL_SPEED = SCROLL_SPEED;
-        SCORE_THRESHOLD_FOR_MAX_SPEED = 1100;
-        TARGET_SPEED = 0;
+       cancelAnimationFrame(animationFrameId);
+       clearInterval(scoreIntervalId);
+       gamewin();
     }
    else if (score >= 700) {
        ORIGINAL_SCROLL_SPEED = SCROLL_SPEED;
@@ -1633,7 +1619,7 @@ function startScoring() {
     scoreIntervalId = setInterval(() => {
         score++;
         scoreDisplay.innerText = `Score: ${score}`;
-    }, 150);
+    }, 100);
 }
 
 
