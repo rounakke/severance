@@ -1619,7 +1619,7 @@ function startScoring() {
     scoreIntervalId = setInterval(() => {
         score++;
         scoreDisplay.innerText = `Score: ${score}`;
-    }, 100);
+    }, 50);
 }
 
 
