@@ -233,16 +233,14 @@ function handleKeyPress(key) {
 
     if (key === 'Enter') {
        
-
             if (isbuttonVisible === true) {
                 onNextButtonPressed();
             }
             else {
                 checkGuess();
             }
-       
 
-        }
+     
 
     } else if (key === 'Backspace') { 
         currentGuess.pop();
