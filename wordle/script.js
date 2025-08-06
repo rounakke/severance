@@ -40,7 +40,8 @@ async function loadWordList(filePath) {
         return new Set(); // Return an empty Set on error
     }
 }
-// --- Game Initialization ---
+
+let fullscreen = false; // Track fullscreen state
 async function initializeGame() {
 
 
@@ -68,7 +69,56 @@ async function initializeGame() {
     } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
         document.documentElement.msRequestFullscreen();
     }
+
+    setTimeout(() => {
+
+        if (document.fullscreenElement == null) {
+
+
+            const overlay = document.createElement('div');
+            overlay.id = 'fullscreen-overlay';
+            overlay.innerHTML = `
+        <p>Press 'ENTER' to go full screen.</p>
+    `;
+            document.body.appendChild(overlay);
+
+            // Add an event listener to the document for the 'Enter' key
+            document.addEventListener('keydown', blackImage);
+
+
+        }
+        else {
+            fullscreen = true;
+        }
+
+    }, 100); 
   
+}
+
+
+function blackImage(event) {
+    if (event.key === 'Enter') {
+
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+            document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+            document.documentElement.msRequestFullscreen();
+        }
+
+
+        // Remove the overlay and the event listener
+        const overlay = document.getElementById('fullscreen-overlay');
+        if (overlay) {
+            overlay.remove();
+        }
+        document.removeEventListener('keydown', blackImage);
+
+       
+    }
 }
 
 function pickRandomWord() {
@@ -182,13 +232,17 @@ function handleKeyPress(key) {
     if (isGameOver) return;
 
     if (key === 'Enter') {
-        if (isbuttonVisible === true) {
-            onNextButtonPressed();
-        }
-        else {
-            checkGuess();
-        }
+       
 
+            if (isbuttonVisible === true) {
+                onNextButtonPressed();
+            }
+            else {
+                checkGuess();
+            }
+       
+
+        }
 
     } else if (key === 'Backspace') { 
         currentGuess.pop();
